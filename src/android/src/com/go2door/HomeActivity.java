@@ -78,7 +78,7 @@ public class HomeActivity extends Activity {
 	EditText edt_search;
 	RatingBar ratingBar;
 	boolean ismenu;
-	ListViewAdapter listViewAdapter;
+//	ListViewAdapter listViewAdapter;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -178,12 +178,12 @@ public class HomeActivity extends Activity {
 
 		list = (ListView) findViewById(R.id.list);
 		refresh();
-		 listViewAdapter= new ListViewAdapter(mcontext, R.layout.itam, iteams);
 		
 		adapter = new MenuAdapter(this, iteams);
-//		list.setAdapter(adapter);
-		list.setAdapter(listViewAdapter);
+		list.setAdapter(adapter);
+//		list.setAdapter(listViewAdapter);
 		//............................
+		/* listViewAdapter= new ListViewAdapter(mcontext, R.layout.itam, iteams);
 		list.setMultiChoiceModeListener(new MultiChoiceModeListener() {
 			 
 			@Override
@@ -239,7 +239,7 @@ public class HomeActivity extends Activity {
 				return false;
 			}
 		});
-		//.....................
+*/		//.....................
 
 		// implementing onclick apearence.
 		tab_left.setOnClickListener(new OnClickListener() {

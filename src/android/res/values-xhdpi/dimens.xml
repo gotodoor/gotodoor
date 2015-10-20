@@ -1,0 +1,16 @@
+<resources>
+
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="profile_name">35dp</dimen>
+	<dimen name="layout_items">18dp</dimen>
+	<dimen name="layout_item">14dp</dimen>
+	<dimen name="rating_bar_height">25dp</dimen>
+    <dimen name="rating_bar_width">25dp</dimen>
+    <dimen name="corner_radius">25px</dimen>
+    <dimen name= "popupdialog_width">400dp</dimen>
+     <dimen name = "menu_iteams">36dp</dimen>
+     <dimen name="text_mediam">36dp</dimen>
+          <dimen name="text_small">26dp</dimen>
+</resources>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+     <string name="app_name">GotoDoor</string>
+    <string name="action_settings">Settings</string>
+    
+    
+    <string name="drawer_open">Slider Menu Opened</string>
+    <string name="drawer_close">Slider Menu Closed</string>
+<string-array name="menu_items">
+        <item>Sign In</item>
+        <item>Profile</item>
+        <item>Location</item>
+        <item>Chat Archive</item>
+        <item>Log out</item>
+        <item>Subscribe</item>
+        <item>Search</item>
+        <item>Painter</item>
+        <item>Household</item>
+        <item>Gas</item>
+        <item>Labour</item>
+        <item>Carpenter</item>
+        <item>Electrician</item>
+        <item>Mason</item>
+        <item>Advertise with us</item>
+        </string-array>
+</resources>

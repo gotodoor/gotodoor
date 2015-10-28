@@ -10,7 +10,7 @@
 <dimen name="layout_item">13dp</dimen>
  <dimen name="corner_radius">10px</dimen>
  <dimen name= "popupdialog_width">300dp</dimen>
- <dimen name = "menu_iteams">27dp</dimen>
+ <dimen name = "menu_iteams">20dp</dimen>
       <dimen name="text_mediam">27dp</dimen>
           <dimen name="text_small">18dp</dimen>
 </resources>

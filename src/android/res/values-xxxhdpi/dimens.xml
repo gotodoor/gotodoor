@@ -2,7 +2,7 @@
 
     <!-- Default screen margins, per the Android Design guidelines. -->
     <dimen name= "popupdialog_width">800dp</dimen>
-     <dimen name = "menu_iteams">62dp</dimen>
+     <dimen name = "menu_iteams">25dp</dimen>
           <dimen name="text_mediam">72dp</dimen>
           <dimen name="text_small">52dp</dimen>
 </resources>

@@ -10,7 +10,7 @@
     <dimen name="rating_bar_width">25dp</dimen>
     <dimen name="corner_radius">25px</dimen>
     <dimen name= "popupdialog_width">400dp</dimen>
-     <dimen name = "menu_iteams">36dp</dimen>
+     <dimen name = "menu_iteams">22dp</dimen>
      <dimen name="text_mediam">36dp</dimen>
           <dimen name="text_small">26dp</dimen>
 </resources>

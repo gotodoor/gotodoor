@@ -1,0 +1,65 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mongo="http://www.springframework.org/schema/data/mongo"
+	xsi:schemaLocation="http://www.springframework.org/schema/context
+          http://www.springframework.org/schema/context/spring-context.xsd
+          http://www.springframework.org/schema/data/mongo
+          http://www.springframework.org/schema/data/mongo/spring-mongo.xsd
+          http://www.springframework.org/schema/beans
+          http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<context:annotation-config />
+
+	<context:component-scan base-package="com.gotodoor" />
+	<mongo:repositories base-package="com.gotodoor"
+		mongo-template-ref="mongoTemplate" />
+
+	<!-- <mongo:mongo host="alfurdapp-dev-001" port="27017" id="mango" /> <mongo:db-factory 
+		mongo-ref="mongo" dbname="gotodoor" id="mongoDbFactory" /> -->
+
+	<!-- <bean id="mongo" class="org.springframework.data.mongodb.core.MongoFactoryBean"> 
+		<property name="host" value="alfurdapp-dev-001" /> </bean> -->
+
+	<!-- <bean id="mongoTemplate" class="org.springframework.data.mongodb.core.MongoTemplate"> 
+		<constructor-arg name="mongoDbFactory" ref="mongoDbFactory" /> </bean> -->
+	<!-- <mongo:db-factory id="mongoDbFactory" host="50.174.18.42" port="16017" 
+		dbname="gotodoor" username="mygo2door" password="2015ghanshyam"/> -->
+	<!-- <mongo:mongo-client id="mongo" credentials="mygo2door:2015ghanshyam@gotodoor" 
+		replica-set="50.174.18.42:16017"> </mongo:mongo-client> <bean id="mongoTemplate" 
+		class="org.springframework.data.mongodb.core.MongoTemplate"> <constructor-arg 
+		name="mongoDbFactory" ref="mongoDbFactory" /> <constructor-arg name="mongo" 
+		ref="mongo"/> </bean> -->
+
+
+
+	<!-- <mongo:mongo id="myRs" replica-set="50.174.18.42:16017"> </mongo:mongo> -->
+	
+	 <!-- Configure Properties for DB Connection -->
+	<bean id="propertyConfigurer"
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="location" value="classpath:config/applicationContext.properties" />
+	</bean>
+	<!-- Mongo DB Beans -->
+	<!-- <mongo:mongo id="replicaSetMongo" replica-set="${mongo.replica.set}" /> -->
+	
+	<bean id="mongoTemplate" class="org.springframework.data.mongodb.core.MongoTemplate">		
+	    <!-- <constructor-arg name="mongoDbFactory" ref="mongoDbFactory" /> -->
+		<!-- <constructor-arg ref="replicaSetMongo" /> -->
+		 <constructor-arg name="mongo" ref="mongo"/>
+		<constructor-arg name="databaseName" value="${mongo.database.name}" />
+	<!-- 	<constructor-arg name="userCredentials" ref="mongoCredentials" /> -->
+	</bean>
+	<bean id="mongoCredentials" class="org.springframework.data.authentication.UserCredentials">
+		<constructor-arg name="username" value="${mongo.username}" />
+		<constructor-arg name="password" value="${mongo.password}" />
+	</bean>
+	
+  <bean class="com.mongodb.MongoURI" id="mongoUri">
+        <constructor-arg value="mongodb://mygo2door:2015ghanshyam@50.174.18.42:16017/gotodoor"  />
+    </bean>
+
+    <bean class="com.mongodb.Mongo" id="mongo">
+        <constructor-arg ref="mongoUri" />
+    </bean>
+
+</beans>

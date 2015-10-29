@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wls:weblogic-web-app
+xmlns:wls="http://xmlns.oracle.com/weblogic/weblogic-web-app"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xmlns:xml="http://www.w3.org/XML/1998/namespace" 
+xsi:schemaLocation="http://xmlns.oracle.com/weblogic/weblogic-web-app
+http://xmlns.oracle.com/weblogic/weblogic-web-app/1.4/weblogic-web-app.xsd">
+<!-- 	<wls:container-descriptor>
+		<wls:prefer-web-inf-classes>true</wls:prefer-web-inf-classes>
+	</wls:container-descriptor> -->
+	<wls:weblogic-version>12.1.3.0</wls:weblogic-version>
+	<wls:context-root>gtk</wls:context-root>
+	<wls:container-descriptor>
+         <wls:prefer-application-packages>
+             <wls:package-name>true</wls:package-name>
+         </wls:prefer-application-packages>
+     </wls:container-descriptor>
+     
+     
+      <wls:container-descriptor>
+          <wls:prefer-web-inf-classes>true</wls:prefer-web-inf-classes>
+     </wls:container-descriptor>
+</wls:weblogic-web-app>

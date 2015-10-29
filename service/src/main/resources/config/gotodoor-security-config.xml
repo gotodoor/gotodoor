@@ -1,0 +1,81 @@
+<beans xmlns="http://www.springframework.org/schema/beans" 
+	xmlns:security="http://www.springframework.org/schema/security"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc" 
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:cache="http://www.springframework.org/schema/cache" 
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd 
+						http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd 
+						http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd 
+						http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd 
+						http://www.springframework.org/schema/cache http://www.springframework.org/schema/cache/spring-cache.xsd 
+						http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd">
+        
+   <mvc:annotation-driven />
+	<!-- Do the component scan path -->
+	<context:annotation-config />
+	
+	<bean id="cacheManager" class="org.springframework.cache.ehcache.EhCacheCacheManager"
+		p:cacheManager-ref="ehcache" />
+
+	<bean id="ehcache"
+		class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean"
+		p:configLocation="classpath:config/ehcache.xml" p:shared="true" />
+	
+	
+   <!-- pre auth -->
+   <context:component-scan base-package="com.gotodoor.svc.security" />
+   
+   <security:http pattern="/app/**" security="none" />
+   
+   <security:http auto-config="false" entry-point-ref="http403EntryPoint" create-session="stateless">
+		
+		<security:intercept-url pattern="/index" access="IS_AUTHENTICATED_ANONYMOUSLY" />
+		<security:intercept-url pattern="/login" access="IS_AUTHENTICATED_ANONYMOUSLY" />
+
+		<security:intercept-url pattern="/rest/**" access="ROLE_USER" />
+		<security:custom-filter ref="webhookautoLoginFilter" position="PRE_AUTH_FILTER" />
+		<security:access-denied-handler error-page="/403"/>
+	</security:http>
+	
+	<bean id="http403EntryPoint" class="org.springframework.security.web.authentication.Http403ForbiddenEntryPoint">
+	</bean>
+	
+	<bean id="webhookautoLoginFilter" class="com.gotodoor.svc.security.WebHookAutoLoginFilter">
+		<property name="authenticationManager" ref="authenticationManager" />
+				
+	</bean>
+	
+	<!-- bean id="UserDetailsServiceImpl" class="com.gotodoor.svc.security.UserDetailsServiceImpl" /-->
+	
+	
+	<bean id="preauthAuthProvider"
+		class="org.springframework.security.web.authentication.preauth.PreAuthenticatedAuthenticationProvider">
+		<property name="preAuthenticatedUserDetailsService">
+			<bean
+				class="com.gotodoor.svc.security.WebHookAuthenticationUserDetailsService">
+				<property name="secretKey" value="1234"></property>
+				
+			</bean>
+		</property>
+		<!-- <property name="order" value="1" />-->
+	</bean>
+	
+	
+	
+	<security:authentication-manager alias="authenticationManager">
+		<security:authentication-provider
+			ref="preauthAuthProvider"></security:authentication-provider>
+
+	</security:authentication-manager>
+	
+	<bean id="usercachedata" class="com.gotodoor.svc.security.CacheUserDataManager"
+		scope="prototype">
+		<property name="cacheManager" ref="&amp;ehcache" />
+		<property name="localCacheName" value="userInfoCache"></property>
+	</bean>
+	
+   
+   </beans>
